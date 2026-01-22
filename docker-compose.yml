@@ -12,7 +12,7 @@ services:
             --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
             --with github.com/caddy-dns/cloudflare \
             --with github.com/greenpau/caddy-security
-
+            
         FROM caddy:$${CADDY_VERSION}-alpine
 
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
@@ -30,6 +30,7 @@ services:
     networks:
       - proxy
       - docker-proxy
+      - bricknet
       - br0
     volumes:
       # - /var/run/docker.sock:/var/run/docker.sock
@@ -89,6 +90,8 @@ networks:
   proxy:
     external: true
   docker-proxy:
+    external: true
+  bricknet:
     external: true
   br0:
     external: true
